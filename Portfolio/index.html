@@ -1,0 +1,389 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Portfolio | Babin</title>
+
+    <link href='https://unpkg.com/boxicons@2.1.4/css/boxicons.min.css' rel='stylesheet'>
+
+    <link rel="icon" href="favcion.jpg" type="image/png">
+    <link rel="stylesheet" href="styles.css">
+    
+    <script type="text/javascript" src="https://cdn.jsdelivr.net/npm/@emailjs/browser@3/dist/email.min.js"></script>
+
+    <style>
+                .projects {
+            min-height: 100vh;
+            padding: 5rem 9% 2rem;
+            position: relative;
+            overflow: hidden;
+        }
+
+        .slideshow-container {
+            width: 100%;
+            max-width: 1200px;
+            height: 600px;
+            margin: 2rem auto;
+            position: relative;
+            overflow: hidden;
+            border-radius: 15px;
+            box-shadow: 0 0 20px rgba(0, 0, 0, 0.3);
+        }
+
+        .slide {
+            position: absolute;
+            width: 100%;
+            height: 100%;
+            opacity: 0;
+            transition: transform 0.8s ease, opacity 0.8s ease;
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            padding: 2rem;
+            background: var(--second-bg-color);
+        }
+
+        .slide.active {
+            opacity: 1;
+            transform: translateX(0);
+            z-index: 1;
+        }
+
+        .slide.next {
+            transform: translateX(100%);
+            opacity: 0;
+        }
+
+        .slide.prev {
+            transform: translateX(-100%);
+            opacity: 0;
+        }
+
+        .slide-image {
+            width: 60%;
+            height: 100%;
+            position: relative;
+            overflow: hidden;
+            border-radius: 10px;
+        }
+
+        .slide-image img {
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+            transition: transform 0.5s ease;
+        }
+
+        .slide:hover .slide-image img {
+            transform: scale(1.1);
+        }
+
+        .slide-content {
+            width: 35%;
+            padding: 2rem;
+            color: var(--text-color);
+            opacity: 0;
+            transform: translateY(20px);
+            transition: opacity 0.5s ease, transform 0.5s ease;
+        }
+
+        .slide.active .slide-content {
+            opacity: 1;
+            transform: translateY(0);
+            transition-delay: 0.3s;
+        }
+
+        .slide-content h3 {
+            font-size: 2.5rem;
+            margin-bottom: 1rem;
+            color: var(--main-color);
+        }
+
+        .slide-content p {
+            font-size: 1.2rem;
+            margin-bottom: 2rem;
+            line-height: 1.6;
+        }
+
+        .slide-buttons {
+            display: flex;
+            gap: 1rem;
+        }
+
+        .slide-btn {
+            padding: 0.8rem 2rem;
+            background: var(--main-color);
+            color: var(--bg-color);
+            border-radius: 5px;
+            font-size: 1.1rem;
+            transition: background 0.3s ease;
+            cursor: pointer;
+            border: none;
+        }
+
+        .slide-btn:hover {
+            background: var(--main-color-hover);
+        }
+
+        .navigation-buttons {
+            position: absolute;
+            bottom: 2rem;
+            left: 50%;
+            transform: translateX(-50%);
+            display: flex;
+            gap: 1rem;
+            z-index: 2;
+        }
+
+        .nav-btn {
+            width: 12px;
+            height: 12px;
+            border-radius: 50%;
+            background: var(--text-color);
+            cursor: pointer;
+            transition: transform 0.3s ease, background 0.3s ease;
+            border: none;
+        }
+
+        .nav-btn.active {
+            background: var(--main-color);
+            transform: scale(1.3);
+        }
+
+        .arrow-btn {
+            position: absolute;
+            top: 50%;
+            transform: translateY(-50%);
+            background: var(--main-color);
+            color: var(--bg-color);
+            width: 50px;
+            height: 50px;
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            cursor: pointer;
+            z-index: 2;
+            border: none;
+            transition: background 0.3s ease, transform 0.3s ease;
+        }
+
+        .arrow-btn:hover {
+            background: var(--main-color-hover);
+            transform: translateY(-50%) scale(1.1);
+        }
+
+        .prev-btn {
+            left: 2rem;
+        }
+
+        .next-btn {
+            right: 2rem;
+        }
+
+        @media (max-width: 991px) {
+            .slide {
+                flex-direction: column;
+            }
+
+            .slide-image, .slide-content {
+                width: 100%;
+            }
+
+            .slide-image {
+                height: 50%;
+            }
+
+            .slide-content {
+                padding: 1rem;
+            }
+        }
+
+    </style>
+
+</head>
+<body>
+
+    <header class="header">
+        <a href="#" class="logo">Portfolio<span>.</span></a>
+        <i class='bx bx-menu' id="menu-icon"></i>
+
+        <nav class="navbar">
+            <a href="#home" class="active">Home</a>
+            <a href="#about">About</a>
+            <a href="#skills">Skills</a>
+            <a href="#projects">Projects</a>
+            <a href="#contact">Contact</a>
+            
+
+        </nav>
+    </header>
+
+    <section class="home" id="home">
+        <div class="home-content">
+            <h3>Hello, It's Me</h3>
+            <h1>Babin Shrestha</h1>
+            <h3>And I'm a <span class="Texts"></span></h3>
+            <p>
+                Mechanical engineer passionate about innovation, designing systems that move the world forward, and crafting solutions that merge precision with creativity. 🚀⚙️
+            </p>
+            <div class="social-media">
+                <a href="https://www.instagram.com/babin_shrestha00/" target="_blank"><i class='bx bxl-instagram' ></i></a>
+                <a href="https://discord.gg/teCXVztcrb" target="_blank"><i class='bx bxl-discord-alt' ></i></a>
+                <a href="https://www.linkedin.com/in/babin-shrestha-52b768231/" target="_blank"><i class='bx bxl-linkedin' ></i></a>
+                <a href="https://www.cgtrader.com/designers/galikton" target="_blank" > <i class='bx bxs-package'></i></a>
+                <a href="https://steamcommunity.com/profiles/76561198990371664/" target="_blank"><i class='bx bxl-steam'></i></a>
+                </div>
+
+                
+
+        </div>
+
+        <div class="home-image">
+            <img src="homex.jpg" width="600px" height="540px" alt="home">
+            
+
+        </div>
+    </section>
+
+    <section class="about" id="about">
+        <h2 class="heading"> About <span> Me</span></h2>
+        <!-- <div class="about-img">
+            <img src="abouta.png" alt="About"> -->
+
+        </div>
+
+        <div class="about-content">
+            <h3>Mechanical Engineering <span>Student</span></h3>
+            <p>As a mechanical engineering student, I love working with machines and specialize in designing, analyzing, and optimizing mechanical systems. In addition, I have a creative flair for innovative problem-solving and enjoy exploring advancements in engineering technology and 3D design using Blender software in my free time.</p>
+            <p>With a keen eye for detail and a passion for creating efficient solutions, I am always looking for new challenges to tackle. Whether it's designing a cutting-edge mechanical system, improving an existing process, or crafting realistic 3D models and visualizations in Blender, I am committed to delivering high-quality results that meet the needs of my projects. With my strong work ethic and dedication to my field, I am confident in my ability to excel in the engineering industry and make a lasting impact.</p>
+            <a href="#" class="btn">Read More</a>
+
+        </div>
+    </section>
+
+    <section class="skills" id="skills">
+        <h2 class="heading">My<span>Skills</span> </h2>
+            <p>I have honed my skills in several key areas, including CAD design using software like Blender and SolidWorks, mechanical system analysis, and product prototyping. My proficiency in these areas allows me to design innovative and efficient mechanical solutions, while my attention to detail ensures precision and quality in every project. By combining my technical expertise with my creative approach, I can develop functional and visually appealing designs that meet user needs and industry standards. My diverse skill set and commitment to excellence make me a valuable asset to any team in the engineering industry.</p>
+        </div>
+
+        <div class="skills-container">
+            <div class="skill-box">
+                <i class='bx bxl-blender' ></i>
+                <h3>Blender</h3>
+                <p>My proficiency in Blender is at an intermediate level, and I have successfully created a variety of projects using this software. These include 3D product models, mechanical part visualizations, realistic renderings, and simple animations, showcasing my ability to bring creative ideas to life.</p>
+
+                <a href="#" class="btn">Read More</a>
+
+            </div>
+
+            <div class="skill-box">
+                <i class='bx bx-hard-hat' ></i>
+                <h3>Ansys</h3>
+                <p>My expertise in Ansys extends to simulations and finite element analysis (FEA), which I have successfully applied to a range of engineering projects. With a solid understanding of Ansys, I am able to conduct accurate simulations and optimize designs for performance and efficiency.</p>
+
+                <a href="#" class="btn">Read More</a>
+
+            </div>
+
+            <div class="skill-box">
+                <i class='bx bxs-package'></i>
+                <h3>Solid Works</h3>
+                <p>
+                    As a SolidWorks user, I have a strong understanding of 3D modeling, simulation, and mechanical design. I have successfully created a range of projects, including detailed product designs, assembly models, and engineering drawings, ensuring both functionality and aesthetic appeal. </p>
+
+                <a href="#" class="btn">Read More</a>
+
+            </div>
+
+            <div class="skill-box">
+                <i class='bx bxl-sketch' ></i>
+                <h3>Graphic Design</h3>
+                <p>As a graphic designer, I possess a deep understanding of design principles and the tools required to create stunning visuals. My skills in Adobe Creative Suite, such as Photoshop, Illustrator, and InDesign, allow me to create eye-catching designs that effectively communicate the intended message. I am able to create a range of visual designs, including logos, brochures, posters, and more, and my experience in both print and digital mediums provides me with a well-rounded skill set.</p>
+
+                <a href="#" class="btn">Read More</a>
+
+            </div>
+
+        </div>
+    </selection>
+
+    <!--projects section-->
+    <section class="projects" id="projects">
+        <h2 class="heading">My <span>Projects</span></h2>
+        
+        <div class="slideshow-container">
+            <!-- Navigation Arrows -->
+            <button class="arrow-btn prev-btn" onclick="changeSlide(-1)">
+                <i class='bx bx-chevron-left'></i>
+            </button>
+            <button class="arrow-btn next-btn" onclick="changeSlide(1)">
+                <i class='bx bx-chevron-right'></i>
+            </button>
+
+            <!-- Slides -->
+            <div class="slide active">
+                <div class="slide-image">
+                    <img src="pic/1.png" alt="Project 1">
+                </div>
+                <div class="slide-content">
+                    <h3>Mechanical Design</h3>
+                    <p>An innovative mechanical solution showcasing precision engineering and creative problem-solving capabilities.</p>
+                    <div class="slide-buttons">
+                        <button class="slide-btn">View Details</button>
+                        <button class="slide-btn">Learn More</button>
+                    </div>
+                </div>
+            </div>
+
+           
+        </div>
+
+        <div class="navigation-buttons">
+         
+        </div>
+    </section>
+
+
+
+
+    <!--Contacts Section-->
+
+    <section class="contact" id="contact">
+        <h2 class="heading"> Contact <span> Me </span> </h2>
+    
+        <form id="contact-form">
+            <div class="input-box">
+                <input type="text" name="first_name" id="first_name" placeholder="First Name" required>
+                <input type="text" name="last_name" id="last_name" placeholder="Last Name" required>
+            </div>
+    
+            <div class="input-box">
+                <input type="email" name="email" id="email" placeholder="Email Address" required>
+                <input type="text" name="subject" id="subject" placeholder="Subject" required>
+            </div>
+    
+            <textarea name="message" id="message" cols="30" rows="10" placeholder="Your Message" required></textarea>
+            <input type="submit" value="Send" class="btn">
+        </form>
+    </section>
+    
+
+    <!--FOOTER-->
+    <footer class="footer">
+        <div class="footer-text">
+            <p>Copyright &copy; 2024 Babin | All Rights Reserved.</p>
+        </div>
+    </footer>
+    
+    <!--Typed js-->
+    <script src="https://unpkg.com/typed.js@2.0.132/dist/typed.umd.js"></script>
+
+
+    <script src="https://unpkg.com/scrollreveal"></script>
+    <script src="script.js"></script>
+    
+</body>
+</html>
